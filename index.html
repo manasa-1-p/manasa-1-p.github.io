@@ -1,1 +1,214 @@
-ortfolio Website Structure & Content Outline ============================================= 1: Hierarchical Section Breakdown --------------------------------- 🏠 Home/Hero Section Components: Header, Hero banner, Quick intro, Featured project preview, CTA button Purpose: Strong first impression, immediate value proposition Key Elements: - Navigation (sticky header) - Hero headline with your name + role - Animated typing effect or rotating skill keywords - Primary CTA: "View My Work" / "Let's Build Something" - Secondary CTA: "Download Resume" 👨‍💻 About Section Components: Personal intro, skills grid, education card, fun facts/personality elements Purpose: Build personal connection, showcase personality + technical foundation Key Elements: - Photo (professional but approachable) - Bio paragraph (draft below) - Interactive skills visualization - Education highlight - Personal interests/hobbies for relatability 🚀 Projects Section Components: Project cards, filters/categories, modal/detail views Purpose: Demonstrate technical capabilities and problem-solving Key Elements: - Featured project spotlight - Project grid with hover effects - Technology tags/badges - Live demo + GitHub links - Case study expandable details 📬 Contact Section Components: Contact form, social links, availability status Purpose: Make it easy for recruiters to reach out Key Elements: - Simple contact form (name, email, message) - Direct email link: [john@gmail.com](mailto:john@gmail.com) - GitHub: github.com/johntester - LinkedIn (recommended to add) - Current availability indicator 2. About Me Section Draft (147 words) -------------------------------------- > Hey there! I'm Manasa – a passionate full-stack developer who loves turning wild ideas into pixel-perfect reality. Currently crushing my BTech (Class of 2028), but I've been coding since before it was cool to have "developer" in your bio. > > My superpower? Building seamless web experiences that make users go "wow, that just works!" From crafting responsive frontends with React and Vue to architecting robust backends with Python and Django, I speak fluent code in multiple dialects. > > When I'm not debugging at 2 AM (okay, maybe I am), you'll find me exploring the latest web technologies, creating digital designs in Illustrator, or helping teams bring their visions to life through clear communication and solid project management. > > I believe great software isn't just about clean code – it's about solving real problems for real people. Ready to build something amazing together? 3. Title/Headline Suggestions ------------------------------ Hero Section Headlines: Primary: "Full-Stack Developer & Digital Problem Solver" Secondary: "Crafting Web Experiences That Actually Work" Alternative: "Code + Creativity = Digital Magic ✨" Section Titles: About: "The Human Behind the Code" / "Meet the Developer" Skills: "My Technical Toolbox" / "What I Bring to the Table" Projects: "Things I've Built" / "From Concept to Code" Contact: "Let's Create Together" / "Ready to Connect?" Project-Specific Headlines: "Featured Build" (for main project spotlight) "Latest Creations" (for recent projects) "Problem → Solution" (for case study sections) 4. Call-to-Action (CTA) Strategy --------------------------------- Primary CTAs (High Impact): Hero Section: "View My Work" (leads to projects) Projects Section: "See Live Demo" / "Check GitHub" About Section: "Let's Build Something" (leads to contact) Secondary CTAs (Supporting): Header: "Download Resume" (PDF link) Footer: "[john@gmail.com](mailto:john@gmail.com)" (mailto link) Project Cards: "Learn More" (expands details) Micro CTAs (Engagement): Skills Section: "See It In Action" (scrolls to projects) Social Links: GitHub icon with hover tooltip Availability Badge: "Currently Available for New Opportunities" Color Palette Implementation: Primary (Dark Navy): 1E293B - Headers, text, backgrounds Secondary (Light Gray): F8FAFC - Backgrounds, cards Accent (Bright Orange): FB923C - CTAs, highlights, hover states Supporting Colors: - White: FFFFFF - Card backgrounds - Medium Gray: 64748B - Secondary text Responsive Breakpoints: Mobile: 320px - 768px Tablet: 768px - 1024px Desktop: 1024px+ 6. Content Enhancement Recommendations --------------------------------------- Missing Project Information Needed: 1. Project 1: [Title] - [Brief description] - [Your role] - [Demo/GitHub links] 2. Project 2: [Title] - [Brief description] - [Your role] - [Demo/GitHub links] 3. Project 3: [Title] - [Brief description] - [Your role] - [Demo/GitHub links] 4. Project 4: [Title] - [Brief description] - [Your role] - [Demo/GitHub links] 5. Project 5: [Title] - [Brief description] - [Your role] - [Demo/GitHub links] Additional Sections to Consider: Testimonials/Reviews (if you have client feedback) Blog/Articles (to show thought leadership) Resume/CV Download (PDF version) Fun Facts (coding setup, favorite technologies, etc.) 7. Technical Implementation Notes ---------------------------------- Tailwind Classes for Design System: Typography: font-inter text-slate-900 dark:text-slate-100 Buttons: bg-orange-500 hover:bg-orange-600 text-white Cards: bg-white dark:bg-slate-800 shadow-lg rounded-xl Layout: container mx-auto px-6 lg:px-8 Animation Suggestions: Scroll-triggered animations with Framer Motion Typing animation for hero text Hover effects on project cards Smooth scrolling between sections Loading animations for project images
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manasa — Full‑Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN for quick prototype -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="color-scheme" content="light dark">
+  <style>
+    :root{
+      --primary:#1E293B; /* dark navy */
+      --accent:#FB923C;  /* bright orange */
+      --muted:#64748B;   /* medium gray */
+      --bg:#F8FAFC;      /* light gray */
+    }
+    html,body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+    .typing > span{border-right:2px solid rgba(0,0,0,0.12);padding-right:6px}
+    @media (prefers-color-scheme:dark){
+      :root{--bg:#0f1724;color-scheme:dark}
+    }
+  </style>
+</head>
+<body class="bg-[color:var(--bg)] text-slate-900 antialiased">
+  <header class="sticky top-0 z-50 bg-white/60 backdrop-blur-md border-b border-gray-200 dark:bg-slate-900/70 dark:border-slate-700">
+    <div class="container mx-auto px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="#home" class="font-semibold text-lg text-[color:var(--primary)]">Manasa</a>
+      <nav class="hidden md:flex gap-6 items-center text-sm text-slate-600">
+        <a href="#about" class="hover:text-[color:var(--primary)]">About</a>
+        <a href="#projects" class="hover:text-[color:var(--primary)]">Projects</a>
+        <a href="#contact" class="hover:text-[color:var(--primary)]">Contact</a>
+        <a href="/resume.pdf" class="ml-2 px-3 py-1 rounded-md bg-[color:var(--accent)] text-white text-sm">Download Resume</a>
+      </nav>
+      <button id="nav-toggle" class="md:hidden p-2 rounded-md border border-gray-200">Menu</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home">
+    <section class="container mx-auto px-6 lg:px-8 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-1 max-w-2xl">
+        <p class="text-sm font-medium text-[color:var(--accent)]">Full-Stack Developer</p>
+        <h1 class="mt-3 text-4xl md:text-5xl font-extrabold leading-tight text-[color:var(--primary)]">Manasa — Crafting web experiences that actually work</h1>
+        <p class="mt-6 text-slate-700 dark:text-slate-300">I build responsive, accessible, and high-performance web apps using React, Vue, Python and Django. I like turning ideas into pixel‑perfect realities.</p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#projects" class="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[color:var(--accent)] text-white font-medium">View My Work</a>
+          <a href="#contact" class="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-gray-200">Let’s Build Something</a>
+          <a href="/resume.pdf" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm">Download Resume</a>
+        </div>
+
+        <div class="mt-6 text-sm text-slate-600">
+          <span class="mr-2">Availability:</span>
+          <span class="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-green-100 text-green-800 text-xs">Currently available for new opportunities</span>
+        </div>
+      </div>
+
+      <div class="flex-1 flex items-center justify-center">
+        <div class="w-64 h-64 rounded-2xl bg-white shadow-xl flex items-center justify-center">
+          <img src="https://via.placeholder.com/220x220.png?text=Profile" alt="Profile photo" class="rounded-2xl" />
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="border-t border-gray-200 dark:border-slate-700 py-12">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-2xl font-semibold text-[color:var(--primary)]">The Human Behind the Code</h2>
+          <p class="mt-4 text-slate-700 dark:text-slate-300">Hey there! I'm Manasa – a passionate full-stack developer who loves turning wild ideas into pixel-perfect reality. Currently crushing my BTech (Class of 2028), but I've been coding since before it was cool to have "developer" in your bio.</p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 bg-white rounded-xl shadow-sm">
+            <h3 class="font-semibold">Skills</h3>
+            <ul class="mt-3 text-sm text-slate-600 space-y-2">
+              <li>React · Vue · TypeScript</li>
+              <li>Python · Django · Flask</li>
+              <li>HTML · CSS · Tailwind</li>
+            </ul>
+          </div>
+
+          <div class="p-6 bg-white rounded-xl shadow-sm">
+            <h3 class="font-semibold">Education</h3>
+            <p class="mt-2 text-sm text-slate-600">BTech — Class of 2028</p>
+          </div>
+
+          <div class="p-6 bg-white rounded-xl shadow-sm">
+            <h3 class="font-semibold">Interests</h3>
+            <p class="mt-2 text-sm text-slate-600">Design, Illustration, New Web APIs, Open Source</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-16">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-[color:var(--primary)]">Things I've Built</h2>
+          <div class="text-sm text-slate-600">Filter: <select id="proj-filter" class="ml-2 border rounded px-2 py-1 text-sm"><option>All</option><option>Web</option><option>Mobile</option><option>Tools</option></select></div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Project Card Template -->
+          <article class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition cursor-pointer" data-title="Project One" onclick="openModal(0)">
+            <img src="https://via.placeholder.com/600x300.png?text=Project+1" alt="Project 1" class="rounded-md w-full h-40 object-cover" />
+            <h3 class="mt-3 font-semibold">Project One</h3>
+            <p class="text-sm text-slate-600 mt-2">Brief description — role: Full-Stack Dev</p>
+            <div class="mt-3 flex gap-2 text-xs">
+              <a href="#" class="px-2 py-1 rounded bg-[color:var(--accent)] text-white">Live Demo</a>
+              <a href="#" class="px-2 py-1 rounded border">GitHub</a>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition" data-title="Project Two" onclick="openModal(1)">
+            <img src="https://via.placeholder.com/600x300.png?text=Project+2" alt="Project 2" class="rounded-md w-full h-40 object-cover" />
+            <h3 class="mt-3 font-semibold">Project Two</h3>
+            <p class="text-sm text-slate-600 mt-2">Brief description — role: Frontend</p>
+            <div class="mt-3 flex gap-2 text-xs">
+              <a href="#" class="px-2 py-1 rounded bg-[color:var(--accent)] text-white">Live Demo</a>
+              <a href="#" class="px-2 py-1 rounded border">GitHub</a>
+            </div>
+          </article>
+
+          <article class="bg-white rounded-xl p-4 shadow hover:shadow-lg transition" data-title="Project Three" onclick="openModal(2)">
+            <img src="https://via.placeholder.com/600x300.png?text=Project+3" alt="Project 3" class="rounded-md w-full h-40 object-cover" />
+            <h3 class="mt-3 font-semibold">Project Three</h3>
+            <p class="text-sm text-slate-600 mt-2">Brief description — role: Backend</p>
+            <div class="mt-3 flex gap-2 text-xs">
+              <a href="#" class="px-2 py-1 rounded bg-[color:var(--accent)] text-white">Live Demo</a>
+              <a href="#" class="px-2 py-1 rounded border">GitHub</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="border-t border-gray-200 dark:border-slate-700 py-12">
+      <div class="container mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-2xl font-semibold text-[color:var(--primary)]">Let’s Create Together</h2>
+          <p class="mt-4 text-slate-600">Interested in working together? Send a quick message and I’ll get back to you.</p>
+
+          <form class="mt-6 grid grid-cols-1 gap-4" action="mailto:john@gmail.com" method="post" enctype="text/plain">
+            <input required name="name" placeholder="Your name" class="px-4 py-3 rounded-lg border" />
+            <input required name="email" type="email" placeholder="Your email" class="px-4 py-3 rounded-lg border" />
+            <textarea required name="message" rows="5" placeholder="Message" class="px-4 py-3 rounded-lg border"></textarea>
+            <div class="flex justify-center">
+              <button type="submit" class="px-6 py-3 rounded-md bg-[color:var(--accent)] text-white font-medium">Send Message</button>
+            </div>
+          </form>
+
+          <div class="mt-6 flex justify-center gap-4 text-sm text-slate-600">
+            <a href="https://github.com/johntester" target="_blank" rel="noopener">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="mailto:john@gmail.com">john@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-12 py-8 text-center text-sm text-slate-600">
+      © <span id="year"></span> Manasa — Built with ❤️
+    </footer>
+  </main>
+
+  <!-- Simple modal for project details -->
+  <div id="modal" class="fixed inset-0 bg-black/40 z-50 hidden items-center justify-center">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 m-4">
+      <button onclick="closeModal()" class="ml-auto mb-4 px-3 py-1 rounded border">Close</button>
+      <h3 id="modal-title" class="text-xl font-semibold"></h3>
+      <p id="modal-body" class="mt-3 text-sm text-slate-700"></p>
+    </div>
+  </div>
+
+  <script>
+    // Simple year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Typing effect (minimal)
+    const typingPhrases = ['React', 'Vue', 'Python', 'Django', 'Tailwind'];
+    let tIndex = 0, charIndex = 0, forward = true;
+    const el = document.querySelector('.typing');
+    // If you want hero typing, add an element and uncomment logic.
+
+    // Modal
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const projects = [
+      {title:'Project One', body:'Detailed case study for Project One. Tech: React, Django. Role: Full-Stack.'},
+      {title:'Project Two', body:'Detailed case study for Project Two. Tech: Vue, Firebase. Role: Frontend.'},
+      {title:'Project Three', body:'Detailed case study for Project Three. Tech: Python, APIs. Role: Backend.'}
+    ];
+    function openModal(i){
+      modalTitle.textContent = projects[i].title;
+      modalBody.textContent = projects[i].body;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeModal(){ modal.classList.remove('flex'); modal.classList.add('hidden'); }
+
+    // Nav toggle (mobile)
+    const navToggle = document.getElementById('nav-toggle');
+    navToggle.addEventListener('click', ()=> alert('Add a mobile menu here — this is a prototype.'));
+  </script>
+</body>
+</html>
