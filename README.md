@@ -1,2 +1,2 @@
-# manassa-1-p.github.io
+# manasa-1-p.github.io
 portfolio web
